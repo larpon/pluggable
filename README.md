@@ -60,6 +60,13 @@ no separate build processes or weird compiler flags, everything is evaluated and
 at compile time like any other V source code, making sure everything works and nothing
 is missing - resulting in a rock solid application run.
 
+Plugins, as used in this writing, happens to be easier to compile into the application,
+rather than compiled externally (because of how trivial V makes it to build applications).
+So, you should not see CIRPs as being 100% the same as the classic dynamically loaded plugins.
+See them as a mechanism providing developers an easy way to extend V source code in
+a well-defined, pluggable manner that is easy to distribute and safe to write since you
+implement and develop against a *well defined API interface*.
+
 For application developers this means they can expose a normal plugin API with which
 anyone can expand on their work. Plugin authors can write, build and distribute plugins for
 the application in a really easy and predictable way.
@@ -74,6 +81,12 @@ which I hope can be improved over time:
 * Since plugins are compiled-in you can not simply delete a library file to disable
   functionality (it can be solved via config files that can be evaluated at run time).
 * The whole application needs to be rebuilt when plugins are enabled/disabled.
+  Hold on, that's not a plugin then? This is why dynamic loading is used in the first
+  place? Yes, that's why e.g. the apache webserver uses the dynamic approach: to avoid users
+  having to rebuild the server everytime a new feature is needed. In V, however, (re)building
+  an application from source is trivial and usually takes no more than a few seconds
+  making it an acceptable trade-off (in my eyes). The plugins can still only operate within
+  the host application's defined plugin API.
 * Deleting active plugin source code *before* disabling plugins can result in compile
   errors that can be hard to deal with when the application is rebuilt.
   If you're not experienced with how the approach works, this can be painful.
