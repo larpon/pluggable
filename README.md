@@ -1,4 +1,4 @@
-# Compiled-In Runtime Plugin (cirp)
+# Compiled-In Runtime Plugin (CIRP)
 
 ## Introduction
 
