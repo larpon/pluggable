@@ -103,6 +103,13 @@ and `Bar`.
 Also notice how the plugins *does not* implement the whole API, only the methods
 they "operate" on. See [foo.v.plugin](foo.v.plugin) and [bar.v.plugin](bar.v.plugin).
 
+## Install
+
+```bash
+git clone https://github.com/Larpon/pluggable.git
+cd pluggable
+```
+
 ## Usage
 
 On first run, as a demo, try running the following commands and observe the output:
