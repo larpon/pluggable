@@ -123,7 +123,7 @@ On first run, as a demo, try running the following commands and observe the outp
 The control commands/flags are:
 
 * `v -d cirp_make run .` (re-)generates plugin boilerplate code from present plugin code.
-* `v -d cirp_template run .` output a V source code template for *writing* an host app plugin.
+* `v -d cirp_template run .` output a V source code template for *writing* a host app plugin.
 * `v -d cirp_enable run .` enables all present plugins in code base (via file name conventions).
 * `v -d cirp_disable run .` disables all present plugins in code base (via file name conventions).
 * `v -d cirp_api run .` show a simple version of the available plugin API.
