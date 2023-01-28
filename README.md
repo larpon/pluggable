@@ -66,6 +66,8 @@ the application in a really easy and predictable way.
 
 Sounds great, right? Well - it _is_ great and it even works, at least in V!
 
+## Caveats
+
 There is a few (known) things about the current solution that is not optimal, though,
 which I hope can be improved over time:
 
