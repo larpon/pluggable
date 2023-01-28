@@ -11,7 +11,7 @@ you can not maintain all of them, some extensions may not fit the goal or
 problem your application is trying to solve, etc.
 
 A classic approach to solving such things is using *runtime* plugins, where you
-you build a plugin as a dynamic/shared library (`.so`/`.dll`) - and then
+build a plugin as a dynamic/shared library (`.so`/`.dll`) - and then
 load it at run time and "glue together" the plugin with the rest of the
 application all happening at run time. In V this can be done with the [`dl`](https://modules.vlang.io/dl.html) module.
 This approach works fine and is being used to successfully develop dynamic
