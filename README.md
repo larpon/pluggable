@@ -60,12 +60,13 @@ no separate build processes or weird compiler flags, everything is evaluated and
 at compile time like any other V source code, making sure everything works and nothing
 is missing - resulting in a rock solid application run.
 
-Plugins, as used in this writing, happens to be easier to compile into the application,
+CIR*Plugins*, happens to be easier to compile into the application,
 rather than compiled externally (because of how trivial V makes it to build applications).
-So, you should not see CIRPs as being 100% the same as the classic dynamically loaded plugins.
+So, you should not see or really compare CIRPs to classic dynamically loaded plugins.
 See them as a mechanism providing developers an easy way to extend V source code in
 a well-defined, pluggable manner that is easy to distribute and safe to write since you
-implement and develop against a *well defined API interface*.
+implement and develop against a *well defined API interface*. In many aspects they are
+like classic plugins, but then again not (especially since they're compiled-in).
 
 For application developers this means they can expose a normal plugin API with which
 anyone can expand on their work. Plugin authors can write, build and distribute plugins for
