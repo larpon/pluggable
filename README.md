@@ -132,7 +132,8 @@ The control commands/flags are:
 The flags `v -d cirp_enable run .` and `v -d cirp_disable run .` often needs to be followed by
 `v -d cirp_make run .` to (re-)generate the glue code.
 
-When plugins are configured you can build and/or run your application like normal:
+When plugins are configured you can build, develop and/or run your application like you would
+normally:
 `v run .`, `v -o app . && ./app` etc.
 
 Happy plug'n'play to all of you!
