@@ -98,7 +98,10 @@ points of the approach can be minimized or eliminated.
 The good thing is that the approach can be implemented (and branded) as an independent
 module that is controlled by the host application and the whole enable/disable process
 is controlled by V compiler `-d` flags, in this example the plugin module is called
-`cirp` and the host application is called `pluggable`.
+`cirp` and the host application is called `pluggable` and the two example plugins `Foo`
+and `Bar`.
+Also notice how the plugins *does not* implement the whole API, only the methods
+they "operate" on. See [foo.v.plugin](foo.v.plugin) and [bar.v.plugin](bar.v.plugin).
 
 ## Usage
 
@@ -106,7 +109,7 @@ On first run, as a demo, try running the following commands and observe the outp
 
 1. `v run .` (should be no output)
 2. `v -d cirp_enable run . && v -d cirp_make run .`
-3. `v run .` (should be output from the plugins)
+3. `v run .` (should have output from the plugins)
 
 The control commands/flags are:
 
