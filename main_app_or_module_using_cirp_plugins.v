@@ -65,7 +65,7 @@ fn handle_cirp() ! {
 					}
 				}
 			}
-			eprintln('Run `-d cirp_make`')
+			eprintln('Run `v -d cirp_make run .`')
 		}
 
 		$if cirp_enable ? {
@@ -84,7 +84,7 @@ fn handle_cirp() ! {
 					}
 				}
 			}
-			eprintln('Run `-d cirp_make`')
+			eprintln('Run `v -d cirp_make run .`')
 		}
 
 		// Generates boilerplate plugin code.
