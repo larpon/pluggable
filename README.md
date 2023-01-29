@@ -1,5 +1,9 @@
 # Compiled-In Runtime Plugin (CIRP)
 
+## TLDR;
+
+Extend any V application via a plugin API (using CIRP), simply by adding V sources and recompiling.
+
 ## Introduction
 
 So. You have a V module or application, some V source, that you want to
@@ -51,19 +55,24 @@ reflection capabilities has improved a lot lately, at the time of writing my V v
 
 The idea is fairly simple:
 
-Let plugin authors write plugins in a way so anyone can simply drop it into an application's
-code base and rebuild the application with a `-d` flag - and *BOOM* the application has magic
-new capabilities. Done.
+Application develpers expose an API in V code that plugin authors can use.
+Plugin authors write plugins in plain V source that can be added to the project, which
+is then recompiled with a set of `-d` flags and *BOOM* the application has magic
+new capabilities. Done. New or removed plugins only need to be enabled *once* so any
+following development *does not* need to use any special flags - you develop the project as
+you would normally.
 
-No run time loading, no ghost calls to functions or methods that are missing, no crashes,
-no separate build processes or weird compiler flags, everything is evaluated and predictable
-at compile time like any other V source code, making sure everything works and nothing
-is missing - resulting in a rock solid application run.
+No run time loading, no ghost calls to missing functions or methods, no null function pointers,
+no crashes, no separate build processes or weird compiler flags. Everything is predictable and
+evaluated at compile time like any other V source code, making sure everything works and nothing
+is missing - resulting in a rock solid application run as you are used to with V.
 
-CIR*Plugins*, happens to be easier to compile into the application,
+CIR*Plugins*, happens to be compiled into the application,
 rather than compiled externally (because of how trivial V makes it to build applications).
-So, you should not see or really compare CIRPs to classic dynamically loaded plugins.
-See them as a mechanism providing developers an easy way to extend V source code in
+So, you should not see or really compare CIRPs to classic dynamically loaded plugins. They
+just happen to solve the same kind of problem and works in a similar way.
+
+See CIRPs as a mechanism providing developers an easy way to extend V source code in
 a well-defined, pluggable manner that is easy to distribute and safe to write since you
 implement and develop against a *well defined API interface*. In many aspects they are
 like classic plugins, but then again not (especially since they're compiled-in).
@@ -73,6 +82,42 @@ anyone can expand on their work. Plugin authors can write, build and distribute 
 the application in a really easy and predictable way.
 
 Sounds great, right? Well - it _is_ great and it even works, at least in V!
+
+## Install
+
+```bash
+git clone https://github.com/Larpon/pluggable.git
+cd pluggable
+```
+
+## Usage
+
+On first run, as a demo, try running the following commands and observe the output:
+
+1. `v run .` (should be no output)
+2. `v -d cirp_enable run . && v -d cirp_make run .`
+3. `v run .` (should have output from the plugins)
+
+The control commands/flags are:
+
+* `v -d cirp_make run .` (re-)generates plugin boilerplate code from present plugin code.
+* `v -d cirp_template run .` output a V source code template for *writing* a host app plugin.
+* `v -d cirp_enable run .` enables all present plugins in code base (via file name conventions).
+* `v -d cirp_disable run .` disables all present plugins in code base (via file name conventions).
+* `v -d cirp_api run .` show a simple version of the available plugin API.
+* `v -d no_cirp run .` disables running any plugin code at run time.
+
+The flags `v -d cirp_enable run .` and `v -d cirp_disable run .` often needs to be followed by
+`v -d cirp_make run .` to (re-)generate the glue code.
+
+When plugins are configured you can build, develop and/or run your application like you would
+normally:
+`v run .`, `v -o app . && ./app` etc.
+
+After enabling the plugins, also try running `v -d cirp_template run .` to check out how working
+plugin code looks like.
+
+Happy plug'n'play to all of you!
 
 ## Caveats
 
@@ -114,43 +159,11 @@ points of the approach can be minimized or eliminated.
 The good thing is that the approach can be implemented (and branded) as an independent
 module that is controlled by the host application and the whole enable/disable process
 is controlled by V compiler `-d` flags, in this example the plugin module is called
-`cirp` and the host application is called `pluggable` and the two example plugins `Foo`
-and `Bar`.
-Also notice how the plugins *does not* implement the whole API, only the methods
-they "operate" on. See [foo.v.plugin](foo.v.plugin) and [bar.v.plugin](bar.v.plugin).
+`cirp` and the host application is called `pluggable` and the two example plugins `foo`
+and `bar`.
 
-## Install
-
-```bash
-git clone https://github.com/Larpon/pluggable.git
-cd pluggable
-```
-
-## Usage
-
-On first run, as a demo, try running the following commands and observe the output:
-
-1. `v run .` (should be no output)
-2. `v -d cirp_enable run . && v -d cirp_make run .`
-3. `v run .` (should have output from the plugins)
-
-The control commands/flags are:
-
-* `v -d cirp_make run .` (re-)generates plugin boilerplate code from present plugin code.
-* `v -d cirp_template run .` output a V source code template for *writing* a host app plugin.
-* `v -d cirp_enable run .` enables all present plugins in code base (via file name conventions).
-* `v -d cirp_disable run .` disables all present plugins in code base (via file name conventions).
-* `v -d cirp_api run .` show a simple version of the available plugin API.
-* `v -d no_cirp run .` disables running any plugin code at run time.
-
-The flags `v -d cirp_enable run .` and `v -d cirp_disable run .` often needs to be followed by
-`v -d cirp_make run .` to (re-)generate the glue code.
-
-When plugins are configured you can build, develop and/or run your application like you would
-normally:
-`v run .`, `v -o app . && ./app` etc.
-
-Happy plug'n'play to all of you!
+Notice how the plugins *does not* implement the whole API, only the methods
+they want to "operate" on. See [foo.v.plugin](foo.v.plugin) and [bar.v.plugin](bar.v.plugin).
 
 # FAQ
 
