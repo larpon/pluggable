@@ -94,9 +94,24 @@ cd pluggable
 
 On first run, as a demo, try running the following commands and observe the output:
 
-1. `v run .` (should be no output)
+1. `v run .` (should have no output, the project does not contain any plugin code)
+2. `v -d cirp_enable run . && v -d cirp_make run .` (the project now contains plugin code)
+3. `v run .` (should have output from the plugins, in `foo.plugin.v` and `bar.plugin.v`)
+
+After enabling the plugins, also try running `v -d cirp_template run .` to check out how working
+plugin code looks like, try and make your own plugin based on the output. Try copying it to a
+file named `foo_bar.v.plugin`. E.g. do:
+
+1. `v -d cirp_template run . > foo_bar.v.plugin`
 2. `v -d cirp_enable run . && v -d cirp_make run .`
-3. `v run .` (should have output from the plugins)
+3. `v run .`
+
+To disable the `foo_bar` plugin do:
+
+1. `v -d cirp_disable run . && v -d cirp_make run .`
+2. `rm foo_bar.v.plugin`
+3. `v -d cirp_enable run . && v -d cirp_make run .`
+4. `v run .`
 
 The control commands/flags are:
 
@@ -113,9 +128,6 @@ The flags `v -d cirp_enable run .` and `v -d cirp_disable run .` often needs to 
 When plugins are configured you can build, develop and/or run your application like you would
 normally:
 `v run .`, `v -o app . && ./app` etc.
-
-After enabling the plugins, also try running `v -d cirp_template run .` to check out how working
-plugin code looks like.
 
 Happy plug'n'play to all of you!
 
