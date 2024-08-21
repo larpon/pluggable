@@ -7,7 +7,7 @@ import os
 import moo // just to test modifying things from other modules. See ./modules/moo
 import cirp // the boilerplate/reflection code implementation. See ./modules/cirp
 
-[heap]
+@[heap]
 struct State {
 mut:
 	goo string = 'goo'
@@ -28,7 +28,7 @@ fn handle_cirp() ! {
 		// Generates a template for user facing plugin code.
 		$if cirp_template ? {
 			tmpl := cirp.template_code[&State](
-				mod: @MOD
+				mod:   @MOD
 				hooks: hooks
 			)!
 			println('${tmpl}')
@@ -37,7 +37,7 @@ fn handle_cirp() ! {
 
 		$if cirp_api ? {
 			api := cirp.api[&State](
-				mod: @MOD
+				mod:   @MOD
 				hooks: hooks
 			)!
 			mut hook_names := '\tinit() !\n' // init is implicit
@@ -91,7 +91,7 @@ fn handle_cirp() ! {
 		$if cirp_make ? {
 			os.rm(output) or {}
 			code := cirp.make_code[&State](
-				mod: @MOD
+				mod:   @MOD
 				hooks: hooks
 			)!
 			os.write_file('${output}', code)!

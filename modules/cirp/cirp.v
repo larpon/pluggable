@@ -9,21 +9,21 @@ module cirp
 // needed for the reflection to work.
 import strconv
 
-[params]
+@[params]
 pub struct MakeConfig {
 	mod         string = 'main'
 	wrap_struct string = 'Plugins'
 	hooks       []Hook
 }
 
-[params]
+@[params]
 pub struct TemplateConfig {
 	mod           string = 'main'
 	plugin_struct string = 'FooPlugin'
 	hooks         []Hook
 }
 
-[params]
+@[params]
 pub struct APIConfig {
 	mod           string = 'main'
 	plugin_struct string = 'FooPlugin'
@@ -141,16 +141,16 @@ pub fn (h []Hook) imports() []string {
 
 pub fn hook(fn_name string, imports []string, hook_args ...HookArg) Hook {
 	return Hook(HookFn{
-		name: fn_name
+		name:    fn_name
 		imports: imports
-		args: hook_args
+		args:    hook_args
 	})
 }
 
 pub fn arg[T](name string, is_mut bool) HookArg {
 	return HookArg{
-		name: name
-		kind: T.name
+		name:   name
+		kind:   T.name
 		is_mut: is_mut
 	}
 }
@@ -248,8 +248,8 @@ mut:
 fn (mut ${receiver} ${struct_name}) init() ! {
 	eprintln(\'${struct_fn} called\')
 }\n
-'
-	// Create stubs
+' // Create stubs
+
 	for hook in config.hooks {
 		v_source += 'fn (mut ${receiver} ${struct_name}) ${hook.gen_signature()} ! {
 	eprintln(\'${struct_fn} called\')
@@ -279,10 +279,10 @@ pub fn api[T](config APIConfig) !API {
 	is_valid_struct_name(plugin_struct_name)!
 
 	mut api := API{
-		mod: config.mod
-		imports: config.hooks.imports()
-		hooks: config.hooks
-		state_struct: state_struct
+		mod:           config.mod
+		imports:       config.hooks.imports()
+		hooks:         config.hooks
+		state_struct:  state_struct
 		plugin_struct: plugin_struct_name
 	}
 	return api

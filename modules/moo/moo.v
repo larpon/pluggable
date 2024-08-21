@@ -3,7 +3,7 @@
 // that can be found in the LICENSE file.
 module moo
 
-[heap]
+@[heap]
 pub struct State {
 pub mut:
 	moo string = 'moo'
