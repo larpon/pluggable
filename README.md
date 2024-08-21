@@ -86,7 +86,7 @@ Sounds great, right? Well - it _is_ great and it even works, at least in V!
 ## Install
 
 ```bash
-git clone https://github.com/Larpon/pluggable.git
+git clone https://github.com/larpon/pluggable.git
 cd pluggable
 ```
 
